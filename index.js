@@ -16,10 +16,6 @@ const supabase = supabaseClient.createClient(supabaseUrl, supabaseKey);
 
 app.get('/', (req, res) => {
   res.sendFile('public/home.html', { root: __dirname });
-  res.sendFile('public/FindAnime.html', { root: __dirname });
-  res.sendFile('public/chatter.html', { root: __dirname });
-  res.sendFile('public/contact.html', { root: __dirname });
-  res.sendFile('public/thankyou.html', { root: __dirname });
 });
 
 

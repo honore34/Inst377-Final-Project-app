@@ -200,23 +200,23 @@ if(document.getElementById('animeResults')){
 // chatter page or community post page 
 
 async function createNewPosts() {
-  await fetch(`/CustomerPost`, {
+  await fetch(`/CommunityPost`, {
     method: 'POST',
     body: JSON.stringify({
-      Username: `${document.getElementById('username').value}`,
-      Comment: `${document.getElementById('posted_comment').value}`,
+      username: document.getElementById('username').value,
+      posted_comment: document.getElementById('posted_comment').value,
     }),
     headers: {
       'content-type': 'application/json',
     },
-  }).then((result) => result.json());
+  }).then((result) => results.json());
 
   await loadpostData();
 }
 
 async function loadpostData(){
 
-    await fetch('/CustomerPost')
+    await fetch(`/CommunityPost`)
     .then((results)=> result.json())
     .then((resultjson)=>{
 
@@ -230,11 +230,11 @@ async function loadpostData(){
             const username = document.createElement('h3');
             username.innerHTML=post['Username'];
 
-            const username = document.createElement('p');
+            const commentPosted = document.createElement('p');
             username.innerHTML=post['Comment'];
 
-            box.appendChild(Username);
-            box.appendChild(comment);
+            box.appendChild(username);
+            box.appendChild(commentPosted);
 
             container.appendChild(box);
         });
