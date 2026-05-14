@@ -196,3 +196,48 @@ if(document.getElementById('animeResults')){
 
 }
 
+
+// chatter page or community post page 
+
+async function createNewPosts() {
+  await fetch(`/CustomerPost`, {
+    method: 'POST',
+    body: JSON.stringify({
+      Username: `${document.getElementById('username').value}`,
+      Comment: `${document.getElementById('posted_comment').value}`,
+    }),
+    headers: {
+      'content-type': 'application/json',
+    },
+  }).then((result) => result.json());
+
+  await loadpostData();
+}
+
+async function loadpostData(){
+
+    await fetch('/CustomerPost')
+    .then((results)=> result.json())
+    .then((resultjson)=>{
+
+        const container = document.createElement('div');
+        container.setAttribute('id','postContainer');
+
+        resultjson.forEach((post)=>{
+            const box = document.createElement('div');
+            box.classList.add('postBox');
+
+            const username = document.createElement('h3');
+            username.innerHTML=post['Username'];
+
+            const username = document.createElement('p');
+            username.innerHTML=post['Comment'];
+
+            box.appendChild(Username);
+            box.appendChild(comment);
+
+            container.appendChild(box);
+        });
+    });
+}
+

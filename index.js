@@ -8,10 +8,20 @@ const port = 3000;
 dotenv.config();
 
 app.use(bodyParser.json());
+app.use(express.static(__dirname + '/public'));
 
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_KEY;
 const supabase = supabaseClient.createClient(supabaseUrl, supabaseKey);
+
+app.get('/', (req, res) => {
+  res.sendFile('public/home.html', { root: __dirname });
+  res.sendFile('public/FindAnime.html', { root: __dirname });
+  res.sendFile('public/chatter.html', { root: __dirname });
+  res.sendFile('public/contact.html', { root: __dirname });
+  res.sendFile('public/thankyou.html', { root: __dirname });
+});
+
 
 app.get('/CommunityPost', async (req, res) => {
   console.log('Attempting to get all Community posts!');
