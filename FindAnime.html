@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <title> Anime-World</title>
+        <link rel ="stylesheet" href="finalproject.css">
+        <script src="finalproject.js" defer></script>
+    </head>
+    <body>
+        <h1><img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAohfBf1vJP9g3sjktw2g44DepA0FNfpa3wg&s" style="height: 50px;">Anime-World</h1>
+        <nav>
+            <ul>
+                <li><a href = "home.html">Home</a></li>
+                <li><a href = "FindAnime.html">Anime Match</a></li>
+                <li><a href = "chatter.html">Community Chat</a></li>
+                
+            </ul>
+        </nav>
+        <div>
+            <select id="genre"> 
+                <option value="">Choose genre</option>
+            </select>
+
+            <select id ="episodeLength">
+                <option value="5 min">Short (5 minute)</option>
+                <option value="12 min">Medium (12 minute)</option>
+                <option value="24 min">Regular (24 minutes)</option>
+                <option value="1 hr">Long (1 hr )</option>
+            </select>
+             
+            <button onclick="findAnime()"> Find Anime</button>
+
+            <div id="animeResults"></div>
+        </div>
+    </body>
+    <footer>
+        <nav>
+            <ul>
+                <li><a href = "contact.html">Contact</a></li>
+                <li><p style="color: black">Copy Right of Honore Mubiayi</p></li>
+            </ul>
+        </nav>
+    </footer>
+</html>

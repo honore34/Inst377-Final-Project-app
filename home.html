@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <title> Anime-World</title>
+        <link rel ="stylesheet" href="finalproject.css">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js" defer></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css">
+        <script src="finalproject.js" defer></script>
+    </head>
+    <body>
+        <h1><img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAohfBf1vJP9g3sjktw2g44DepA0FNfpa3wg&s" style="height: 50px;">Anime-World</h1>
+        <nav>
+            <ul>
+                <li><a href = "home.html">Home</a></li>
+                <li><a href = "FindAnime.html">Anime Match</a></li>
+                <li><a href = "chatter.html">Community Chat</a></li>
+                
+            </ul>
+        </nav>
+        <div class = "main">
+
+            <div class ="slideshow swiper">
+                <div class = "swiper-wrapper" id = "animeImage"></div>
+                <div class = "swiper-button-next"></div>
+                <div class = "swiper-button-prev"></div>
+                <div class="swiper-pagination"></div> 
+            </div>
+
+        <aside id = "top-anime-rating">
+                <h3>Anime Ratings</h3><hr>
+                <P>Below you can see the top animes based on ratings </P>
+                <p> You can hover over each dots in the chart and it will show exact ratings</p>
+                <select id="limit">
+                    <option value ="5">Top 5</option>
+                    <option value ="10">Top 10</option>
+                    <option value ="15">Top 15</option>
+                    <option value ="20">Top 20</option>
+                    <option value ="25">Top 25</option>
+
+                </select><br></br>
+                <button onclick="lookupAnime()"> View Results</button>
+                <div id = "chart-container">
+                    <canvas id="Chart"></canvas>
+                </div>
+
+            </aside>  
+        </div>
+        <div class ="quote-box">
+            <h3>Anime Quote of the day</h3>
+            <p id="quote"></p>
+        </div>  
+    </body>
+    <footer>
+        <nav>
+            <ul>
+                <li><a href = "contact.html">Contact</a></li>
+                <li><p style="color: black">Copy Right of Honore Mubiayi</p></li>
+            </ul>
+        </nav>
+    </footer>
+</html>
+
