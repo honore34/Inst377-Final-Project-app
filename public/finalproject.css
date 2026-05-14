@@ -79,3 +79,21 @@ text-decoration: none;
     display: 'none';
     margin-top: 5px;
 }
+
+/* FindAnime page */
+
+#animeResults{
+    display: flex;
+    color: black;
+    flex-direction: column;
+    align-items: center;
+}
+
+.animeFound{
+    width:600px;
+    background-color: white;
+    border: 6px solid black;
+    padding: 20px;
+    margin-bottom: 30px;
+    margin-top: 10px;
+}

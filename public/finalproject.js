@@ -110,7 +110,11 @@ if(document.getElementById('genre')){
 
         const genreOption = document.getElementById('genre');
 
-        data.data.forEach(genre =>{
+        data.data
+        .filter(genre => genre.mal_id)
+        .sort((a,b)=>b.count-a.count)
+        .slice(0,10)
+        .forEach(genre =>{
 
             genreOption.innerHTML +=`
             <option value="${genre.name}">${genre.name}</option>`;
@@ -119,49 +123,24 @@ if(document.getElementById('genre')){
         });
 
 }
-/*
-if(document.getElementById('genre')){
-
-    async function loadGenre(){
-        const genreOption = document.getElementById('genre');
-
-            const animeAPI = await fetch('https://api.jikan.moe/v4/top/anime?limit=50');
-
-            const animeData = await animeAPI.json();
-            const genreCount = {};
-
-            animeData.data.forEach(anime =>{
-
-                anime.genres.forEach(genre => {
-
-                    if(!genreCount[genre.name]){
-                        genreCount[genre.name]=0;
-                    }
-                    genreCount[genre.name]++;
-                });
-            });
-
-            Object.keys(genreCount).forEach(gName => {
-                if(genreCount[gName]>=3){
-                    genreOption.innerHTML +=` 
-                    <option value="${gName}">${gName}</option>`;
-                }
-            });
-    }
-    loadGenre();
-}
-    
-*/
 
 if(document.getElementById('animeResults')){
+
+    document.getElementById('animeResults').style.display ='none';
 
     window.findAnime = async function(){
 
         const genre = document.getElementById('genre').value;
 
         const episodeslength = document.getElementById('episodeLength').value;
+        const genreFetch = await fetch('https://api.jikan.moe/v4/genres/anime')
 
-        const dataAPI = await fetch('https://api.jikan.moe/v4/top/anime?limit=25')
+        const genreData = await genreFetch.json();
+
+        const foundG = genreData.data.find(g=>g.name===genre);
+        
+        const genreID = foundG.mal_id;
+        const dataAPI = await fetch(`https://api.jikan.moe/v4/anime?genres=${genreID}&limit=25`)
 
         const data = await dataAPI.json();
 
@@ -170,15 +149,39 @@ if(document.getElementById('animeResults')){
         container.innerHTML ='';
 
         const matches = data.data.filter(anime => {
+        if(!anime.duration) return false;
 
-        const matchGenre = anime.genres.some( g => g.name === genre);
+        let durationEP;
+        if(anime.duration.includes('hr')){
+            durationEP = 60;
+        }else {
+        durationEP = parseInt(anime.duration);
+        }
+        let matchDuration = false;
 
-        const matchDuration = anime.duration.includes(episodeslength);
-        return matchGenre && matchDuration;
+
+        if( episodeslength === 'Short') {
+            matchDuration = durationEP >= 5 && durationEP <= 20;
+        }else if( episodeslength === 'Regular') {
+            matchDuration = durationEP >= 20 && durationEP <= 30;
+        }else if( episodeslength === 'Long') {
+            matchDuration = durationEP >= 40 ;
+        }
+        return matchDuration;
 
         });
 
        const randomList = matches.sort(()=> Math.random()-.5);
+
+       if(randomList.length === 0){
+            container.innerHTML=`
+            <div class = "animeFound">
+            <h3>Match not Found.<h3>
+            <p> Try a different genre or episode length.</p>
+            </div>`;
+            document.getElementById('animeResults').style.display = 'block';
+            return;
+       }
 
         randomList.slice(0,3).forEach(anime => {
 
@@ -186,13 +189,19 @@ if(document.getElementById('animeResults')){
             <div class = "animeFound">
                 <img src="${anime.images.jpg.image_url}">
                 <h3>${anime.title}</h3>
+                <p> This show aired: ${anime.aired.string}</p>
                 <p> Episodes : ${anime.episodes}</p>
                 <p> Episodes Duration : ${anime.duration}</p>
-                <p> Overall Rating : ${anime.score}</p>
-                <p> Short background : ${anime.background}</p>
+                <p> Rated: ${anime.rating}</p>
+                <p> Overall Score Rating : ${anime.score}</p>
+                <p> Short synopsis : ${anime.synopsis }</p>
+                <p> If you want to explore more here is a link: 
+                <a href ="${anime.url}" target="_blank"> View Anime</a></p>
+                       
             </div>`;
 
         });
+        document.getElementById('animeResults').style.display = 'block';
     };
 
 }
@@ -201,7 +210,7 @@ if(document.getElementById('animeResults')){
 // chatter page or community post page 
 
 async function createNewPosts() {
-  await fetch(`/CommunityPost`, {
+  const response = await fetch(`/CommunityPost`, {
     method: 'POST',
     body: JSON.stringify({
       username: document.getElementById('username').value,
@@ -210,7 +219,9 @@ async function createNewPosts() {
     headers: {
       'content-type': 'application/json',
     },
-  }).then((result) => result.json());
+  });
+   const data = await response.json();
+   console.log("here is the data", data);
 
   await loadpostData();
 }
@@ -229,10 +240,10 @@ async function loadpostData(){
             box.classList.add('postBox');
 
             const username = document.createElement('h3');
-            username.innerHTML=post.username;
+            username.innerHTML=post['username'];
 
             const commentPosted = document.createElement('p');
-            username.innerHTML=post.posted_comment;
+            commentPosted.innerHTML=post['posted_comment'];
 
             box.appendChild(username);
             box.appendChild(commentPosted);

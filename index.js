@@ -32,6 +32,10 @@ app.get('/CommunityPost', async (req, res) => {
     console.log('Recieved Data:', data);
     res.json(data);
   }
+
+  console.log("data",data);
+  console.log("error",error);
+
 });
 
 app.post('/CommunityPost', async (req, res) => {
@@ -41,10 +45,7 @@ app.post('/CommunityPost', async (req, res) => {
 
   const { data, error } = await supabase
     .from('CommunityPost')
-    .insert({
-      username: username,
-      posted_comment: posted_comment,
-    })
+    .insert({ username, posted_comment })
     .select();
 
   if (error) {
