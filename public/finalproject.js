@@ -102,7 +102,7 @@ if(document.getElementById('animeImage')){
 
 // anime find match
 
-/*if(document.getElementById('genre')){
+if(document.getElementById('genre')){
 
     fetch('https://api.jikan.moe/v4/genres/anime')
     .then(results => results.json())
@@ -118,7 +118,8 @@ if(document.getElementById('animeImage')){
             });
         });
 
-}*/
+}
+/*
 if(document.getElementById('genre')){
 
     async function loadGenre(){
@@ -150,7 +151,7 @@ if(document.getElementById('genre')){
     loadGenre();
 }
     
-
+*/
 
 if(document.getElementById('animeResults')){
 
@@ -160,7 +161,7 @@ if(document.getElementById('animeResults')){
 
         const episodeslength = document.getElementById('episodeLength').value;
 
-        const dataAPI = await fetch('https://api.jikan.moe/v4/top/anime?limit=20')
+        const dataAPI = await fetch('https://api.jikan.moe/v4/top/anime?limit=25')
 
         const data = await dataAPI.json();
 
@@ -209,7 +210,7 @@ async function createNewPosts() {
     headers: {
       'content-type': 'application/json',
     },
-  }).then((result) => results.json());
+  }).then((result) => result.json());
 
   await loadpostData();
 }
@@ -217,7 +218,7 @@ async function createNewPosts() {
 async function loadpostData(){
 
     await fetch(`/CommunityPost`)
-    .then((results)=> result.json())
+    .then((result)=> result.json())
     .then((resultjson)=>{
 
         const container = document.createElement('div');
@@ -228,10 +229,10 @@ async function loadpostData(){
             box.classList.add('postBox');
 
             const username = document.createElement('h3');
-            username.innerHTML=post['Username'];
+            username.innerHTML=post.username;
 
             const commentPosted = document.createElement('p');
-            username.innerHTML=post['Comment'];
+            username.innerHTML=post.posted_comment;
 
             box.appendChild(username);
             box.appendChild(commentPosted);
