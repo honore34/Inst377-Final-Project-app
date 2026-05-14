@@ -100,7 +100,25 @@ if(document.getElementById('animeImage')){
 }
 
 
-// anime find match 
+// anime find match
+
+/*if(document.getElementById('genre')){
+
+    fetch('https://api.jikan.moe/v4/genres/anime')
+    .then(results => results.json())
+    .then(data =>{ 
+
+        const genreOption = document.getElementById('genre');
+
+        data.data.forEach(genre =>{
+
+            genreOption.innerHTML +=`
+            <option value="${genre.name}">${genre.name}</option>`;
+            
+            });
+        });
+
+}*/
 if(document.getElementById('genre')){
 
     async function loadGenre(){
