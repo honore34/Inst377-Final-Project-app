@@ -238,6 +238,13 @@ async function loadpostData(){
 
             container.appendChild(box);
         });
+        const preExisting = document.getElementById('postContainer');
+
+        if (preExisting) {
+        preExisting.remove();
+      }
+
+      document.body.appendChild(container);
     });
 }
 
