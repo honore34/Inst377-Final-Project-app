@@ -194,7 +194,7 @@ if(document.getElementById('animeResults')){
                 <p> Episodes Duration : ${anime.duration}</p>
                 <p> Rated: ${anime.rating}</p>
                 <p> Overall Score Rating : ${anime.score}</p>
-                <p> Short synopsis : ${anime.synopsis }</p>
+                <p> Short Synopsis: ${anime.synopsis }</p>
                 <p> If you want to explore more here is a link: 
                 <a href ="${anime.url}" target="_blank"> View Anime</a></p>
                        
@@ -213,8 +213,8 @@ async function createNewPosts() {
   const response = await fetch(`/CommunityPost`, {
     method: 'POST',
     body: JSON.stringify({
-      username: document.getElementById('username').value,
-      posted_comment: document.getElementById('posted_comment').value,
+      username: document.getElementById('Username').value,
+      posted_comment: document.getElementById('postComment').value,
     }),
     headers: {
       'content-type': 'application/json',

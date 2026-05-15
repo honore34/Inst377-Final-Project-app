@@ -14,21 +14,21 @@
                 
             </ul>
         </nav>
-        <div>
-            <select id="genre"> 
+        <div class ="searchBox">
+            <h2> Lets find you a new anime show !</h2>
+            <strong >Select the Genre you like :</strong><select id="genre"> 
                 <option value="">Choose genre</option>
-            </select>
+            </select><br></br>
 
-            <select id ="episodeLength">
+            <strong>Select the Episode length you like:</strong><select id ="episodeLength">
                 <option value="Short">Short</option>
                 <option value="Regular">Regular</option>
                 <option value="Long">Long</option>
-            </select>
+            </select><br></br>
              
             <button onclick="findAnime()"> Find Anime</button>
-
-            <div id="animeResults"></div>
         </div>
+        <div id="animeResults"></div>
     </body>
     <footer>
         <nav>

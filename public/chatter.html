@@ -15,13 +15,13 @@
             </ul>
         </nav>
         <div>
-            <form onsubmit="createComments(); return false;">
+            <form onsubmit="createNewPosts(); return false;">
             <label for="Username">Username</label>
-            <input type="text" id="Username" ><br>
+            <input type="text" id="Username" required><br>
             <label for="postComment">Comments</label>
             <br>
             <textarea id="postComment" required></textarea><br></br>
-            <input type="submit" name="Posted Comment">
+            <button type="submit">Post</button>
             </form>
             <div id="commentSection"></div>  
         </div>
