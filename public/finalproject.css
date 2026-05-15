@@ -116,3 +116,38 @@ margin-left: 17%;
 margin-right: 15%;
 
 }
+
+/*Chatter page*/
+
+.postBox{
+background-color: aqua;
+padding: 20px;
+border-radius: 20px;
+border: solid black;
+margin-bottom: 20px;
+
+}
+.postBox p{
+    white-space: pre-line;
+}
+
+.postSection{
+display: flex;   
+gap: 30px;
+align-items: flex-start;
+}
+.postSection form{
+    width: 30%;
+    background-color: aqua;
+    padding: 20px;
+    border: solid black;
+    border-radius: 20px;
+}
+
+#commentSection{
+    width: 60%;
+    padding: 10px;
+    border-radius: 15px;
+    margin: 3px;
+    
+}

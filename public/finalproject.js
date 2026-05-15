@@ -221,7 +221,8 @@ async function createNewPosts() {
     },
   });
    const data = await response.json();
-   console.log("here is the data", data);
+   document.getElementById('Username').value ='';
+   document.getElementById('postComment').value ='';
 
   await loadpostData();
 }
@@ -245,8 +246,30 @@ async function loadpostData(){
             const commentPosted = document.createElement('p');
             commentPosted.innerHTML=post['posted_comment'];
 
+            const likeButton = document.createElement('button');
+            likeButton.innerHTML = `&#128077;${post.likes}`;
+
+            likeButton.onclick = async ()=>{
+                await fetch(`/CommunityPost/${post.id}/likes`,{
+                    method:'PUT'
+                });
+                loadpostData();
+            }
+
+            const dislikeButton = document.createElement('button');
+            dislikeButton.innerHTML = `&#128078;${post.dislikes}`;
+
+            dislikeButton.onclick = async ()=>{
+                await fetch(`/CommunityPost/${post.id}/dislikes`,{
+                    method:'PUT'
+                });
+                loadpostData();
+            }
+
             box.appendChild(username);
             box.appendChild(commentPosted);
+            box.appendChild(likeButton);
+            box.appendChild(dislikeButton);
 
             container.appendChild(box);
         });
@@ -256,7 +279,8 @@ async function loadpostData(){
         preExisting.remove();
       }
 
-      document.body.appendChild(container);
+      document.getElementById('commentSection')
+      .appendChild(container);
     });
 }
-
+loadpostData();

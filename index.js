@@ -60,3 +60,38 @@ app.post('/CommunityPost', async (req, res) => {
 app.listen(port, () => {
   console.log(`App is available on port: ${port}`);
 });
+
+app.put('/CommunityPost/:id/likes', async(req,res)=>{
+    const id = req.params.id;
+    const {data: currentPost} = await supabase
+    .from('CommunityPost')
+    .select('likes')
+    .eq('id',id)
+    .single();
+
+    const{data, error}= await supabase
+    .from('CommunityPost')
+    .update({likes: currentPost.likes +1})
+    .eq('id',id);
+
+    res.json(data);
+         
+});
+
+app.put('/CommunityPost/:id/dislikes', async(req,res)=>{
+    const id = req.params.id;
+    const {data: currentPost} = await supabase
+    .from('CommunityPost')
+    .select('dislikes')
+    .eq('id',id)
+    .single();
+
+    const{data, error}= await supabase
+    .from('CommunityPost')
+    .update({dislikes: currentPost.dislikes +1})
+    .eq('id',id);
+    
+    res.json(data);
+        
+    
+});
