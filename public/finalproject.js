@@ -247,7 +247,7 @@ async function loadpostData(){
             commentPosted.innerHTML=post['posted_comment'];
 
             const likeButton = document.createElement('button');
-            likeButton.innerHTML = `&#128077;${post.likes}`;
+            likeButton.innerHTML = `&#128077;${post.likes || 0}`;
 
             likeButton.onclick = async ()=>{
                 await fetch(`/CommunityPost/${post.id}/likes`,{
@@ -257,7 +257,7 @@ async function loadpostData(){
             }
 
             const dislikeButton = document.createElement('button');
-            dislikeButton.innerHTML = `&#128078;${post.dislikes}`;
+            dislikeButton.innerHTML = `&#128078;${post.dislikes||0}`;
 
             dislikeButton.onclick = async ()=>{
                 await fetch(`/CommunityPost/${post.id}/dislikes`,{

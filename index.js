@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
 app.get('/CommunityPost', async (req, res) => {
   console.log('Attempting to get all Community posts!');
 
-  const { data, error } = await supabase.from('CommunityPost').select();
+  const { data, error } = await supabase.from('CommunityPost').select('*');
 
   if (error) {
     console.log(`Error: ${error}`);
@@ -71,7 +71,7 @@ app.put('/CommunityPost/:id/likes', async(req,res)=>{
 
     const{data, error}= await supabase
     .from('CommunityPost')
-    .update({likes: currentPost.likes +1})
+    .update({likes: (currentPost.likes || 0) +1})
     .eq('id',id);
 
     res.json(data);
@@ -88,7 +88,7 @@ app.put('/CommunityPost/:id/dislikes', async(req,res)=>{
 
     const{data, error}= await supabase
     .from('CommunityPost')
-    .update({dislikes: currentPost.dislikes +1})
+    .update({dislikes: (currentPost.dislikes|| 0)+1})
     .eq('id',id);
     
     res.json(data);
