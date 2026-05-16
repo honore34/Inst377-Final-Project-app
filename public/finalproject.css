@@ -34,6 +34,7 @@ text-decoration: none;
     align-items: flex-start;
     margin-top: 10px;
 }
+
 /* picture slide*/
 .slideshow{
     width:70%;
@@ -80,6 +81,29 @@ text-decoration: none;
     margin-top: 5px;
 }
 
+/* CSS button */
+.rating-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6px 14px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+  border-radius: 6px;
+  border: none;
+
+  color: #fff;
+  background: linear-gradient(180deg, #44e082 0%, #44e379 100%);
+   background-origin: border-box;
+  box-shadow: 0px 0.5px 1.5px rgba(54, 122, 246, 0.25), inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.rating-button:focus {
+  box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1.5px rgba(54, 122, 246, 0.25), 0px 0px 0px 3.5px rgba(58, 108, 217, 0.5);
+  outline: 0;
+}
 /* FindAnime page */
 
 #animeResults{
@@ -105,7 +129,12 @@ text-decoration: none;
 
     object-fit: fill;
 }
+#loading-match {
+    display: none;
+    width:800px;
+    margin: auto;
 
+}
 .searchBox{
 background-color: aqua;
 padding: 20px;
@@ -114,9 +143,55 @@ border: solid black;
 text-align: center;
 margin-left: 17%;
 margin-right: 15%;
+margin-bottom: 10px;
 
 }
 
+
+/* CSS anime match button*/
+
+.button-anime {
+  appearance: none;
+  background-color: #FFFFFF;
+  border-radius: 40em;
+  border-style: none;
+  box-shadow: #ADCFFF 0 -12px 6px inset;
+  box-sizing: border-box;
+  color: #000000;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system,sans-serif;
+  font-size: 1 rem;
+  font-weight: 700;
+  letter-spacing: -.24px;
+  margin: 0;
+  outline: none;
+  padding: .7rem 1rem;
+  quotes: auto;
+  text-align: center;
+  text-decoration: none;
+  transition: all .15s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-anime:hover {
+  background-color: #29ff49;
+  box-shadow: #14ff89 0 -6px 8px inset;
+  transform: scale(1.125);
+}
+
+.button-anime:active {
+  transform: scale(1.025);
+}
+
+@media (min-width: 768px) {
+  .button-anime {
+    font-size: 1.5rem;
+    padding: .75rem 2rem;
+  }
+}
 /*Chatter page*/
 
 .postBox{

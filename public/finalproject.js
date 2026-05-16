@@ -27,16 +27,19 @@ let chart;
 
 if (document.getElementById('Chart')){
     
-
+    document.getElementById('chart-container').style.display ='none';
+    document.getElementById('loading').style.display ='none';
     window.lookupAnime = async function (){
-        document.getElementById('Chart').style.display ='none';
-        document.getElementById('spinner').style.display ='block';
+        document.getElementById('chart-container').style.display ='none';
+        document.getElementById('loading').style.display ='block';
 
         const limit = document.getElementById('limit').value;
 
         const searchAPI = await fetch(`https://api.jikan.moe/v4/top/anime?limit=${limit}`);
 
         const animeData = await searchAPI.json();
+
+        await new Promise(resolve => setTimeout(resolve,3000));
 
         const labels = [];
 
@@ -64,8 +67,8 @@ if (document.getElementById('Chart')){
             },
               
         });
-        document.getElementById('Chart').style.display = 'block';
-        document.getElementById('spinner').style.display = 'none';
+        document.getElementById('chart-container').style.display = 'block';
+        document.getElementById('loading').style.display = 'none';
     };
 
 }
@@ -130,9 +133,14 @@ if(document.getElementById('genre')){
 if(document.getElementById('animeResults')){
 
     document.getElementById('animeResults').style.display ='none';
+    document.getElementById('loading-match').style.display = 'none';
 
     window.findAnime = async function(){
+        const container = document.getElementById('animeResults');
+        container.innerHTML ='';
+        container.style.display ='none';
 
+        document.getElementById('loading-match').style.display = 'block';
         const genre = document.getElementById('genre').value;
 
         const episodeslength = document.getElementById('episodeLength').value;
@@ -146,8 +154,7 @@ if(document.getElementById('animeResults')){
         const dataAPI = await fetch(`https://api.jikan.moe/v4/anime?genres=${genreID}&limit=25`)
 
         const data = await dataAPI.json();
-
-        const container = document.getElementById('animeResults');
+        await new Promise(resolve => setTimeout(resolve,3000));
 
         container.innerHTML ='';
 
@@ -179,10 +186,11 @@ if(document.getElementById('animeResults')){
        if(randomList.length === 0){
             container.innerHTML=`
             <div class = "animeFound">
-            <h3>Match not Found.<h3>
+            <h3>Match not Found.</h3>
             <p> Try a different genre or episode length.</p>
             </div>`;
             document.getElementById('animeResults').style.display = 'block';
+            document.getElementById('loading-match').style.display = 'none';
             return;
        }
 
@@ -205,6 +213,8 @@ if(document.getElementById('animeResults')){
 
         });
         document.getElementById('animeResults').style.display = 'block';
+        document.getElementById('loading-match').style.display = 'none';
+        container.style.display ='block';
     };
 
 }
