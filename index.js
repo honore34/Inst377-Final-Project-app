@@ -22,7 +22,9 @@ app.get('/', (req, res) => {
 app.get('/CommunityPost', async (req, res) => {
   console.log('Attempting to get all Community posts!');
 
-  const { data, error } = await supabase.from('CommunityPost').select('*');
+  const { data, error } = await supabase.from('CommunityPost')
+  .select('*')
+  .order('id',{ascending: true});
 
   if (error) {
     console.log(`Error: ${error}`);

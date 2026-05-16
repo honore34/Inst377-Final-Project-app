@@ -220,7 +220,7 @@ if(document.getElementById('animeResults')){
 }
 
 
-// chatter page or community post page 
+// chatter html/community post page 
 
 async function createNewPosts() {
   const response = await fetch(`/CommunityPost`, {
@@ -260,6 +260,7 @@ async function loadpostData(){
             commentPosted.innerHTML=post['posted_comment'];
 
             const likeButton = document.createElement('button');
+            likeButton.classList.add('like-button')
             likeButton.innerHTML = `&#128077;${post.likes}`;
 
             likeButton.onclick = async ()=>{
@@ -271,7 +272,7 @@ async function loadpostData(){
 
             const dislikeButton = document.createElement('button');
             dislikeButton.innerHTML = `&#128078;${post.dislikes}`;
-
+            dislikeButton.classList.add('dislike-button')
             dislikeButton.onclick = async ()=>{
                 await fetch(`/CommunityPost/${post.id}/dislikes`,{
                     method:'PUT'

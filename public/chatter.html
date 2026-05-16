@@ -14,7 +14,7 @@
                 
             </ul>
         </nav>
-        <h3> Feel free to post a Comment</h3>
+        <h3> Feel free to post a Comment:</h3>
         <div class ="postSection">
             <form onsubmit="createNewPosts(); return false;">
             <label for="Username">Username:</label>
@@ -22,9 +22,14 @@
             <label for="postComment">Comments:</label>
             <br>
             <textarea id="postComment" required></textarea><br></br>
-            <button type="submit">Post</button>
+            <button class ="button-post" type="submit">Post</button>
             </form>  
-            <aside id="commentSection"></aside>
+
+            <aside id="commentSection">
+                <div class="commentsection" >
+                    <h2>Comment Section:</h2>
+                </div>
+            </aside>
         </div>
         
     </body>
