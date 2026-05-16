@@ -298,3 +298,37 @@ async function loadpostData(){
     });
 }
 loadpostData();
+
+// text validate for posts: looking for bad words.
+
+function validatePostComment(){
+    const text = document.getElementById("postComment").value.toLowerCase();
+
+    const badWords = ["fuck","shit","stupid","bitch","ass"]; //these are bad words we don't want 
+    
+    for(let i =0; i< badWords.length; i++){
+        if(text.includes(badWords[i])){
+            alert("Please keep comments respectful.")
+
+            return false;
+        }
+    }
+    return true;
+}
+
+// text validate for contact: looking for bad words.
+
+function validateContactMessage(){
+    const text = document.getElementById("message").value.toLowerCase();
+
+    const badWords = ["fuck","shit","stupid","bitch","ass"]; //these are bad words we don't want 
+    
+    for(let i =0; i< badWords.length; i++){
+        if(text.includes(badWords[i])){
+            alert("Please keep comments respectful.")
+
+            return false;
+        }
+    }
+    return true;
+}
