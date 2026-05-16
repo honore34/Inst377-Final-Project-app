@@ -76,3 +76,5 @@ Overall importantly having an account on this application so users can log in an
 
 Also improving the recommendation where if they already recommended an anime it won’t recommend again. 
 Finally adding more genre and anime to the recommendation page. 
+
+Note: if you want custom buttons here is a link to that page: https://getcssscan.com/css-buttons-examples. 
