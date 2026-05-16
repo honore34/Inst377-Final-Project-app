@@ -65,17 +65,23 @@ app.listen(port, () => {
 
 app.put('/CommunityPost/:id/likes', async(req,res)=>{
     const id = req.params.id;
-    const {data: currentPost} = await supabase
+
+    const {data: currentPost,error: fetchError } = await supabase
     .from('CommunityPost')
     .select('likes')
     .eq('id',id)
     .single();
+    if(fetchError){
+        return res.status(500).json(fetchError);
+    }
 
-    const currentLike = currentPost.likes;
+    const currentLike = currentPost.likes ;
+
     const{data, error}= await supabase
     .from('CommunityPost')
     .update({likes: currentLike +1})
-    .eq('id',id);
+    .eq('id',id)
+    .select();
 
     res.json(data);
          
@@ -83,12 +89,17 @@ app.put('/CommunityPost/:id/likes', async(req,res)=>{
 
 app.put('/CommunityPost/:id/dislikes', async(req,res)=>{
     const id = req.params.id;
-    const {data: currentPost} = await supabase
+    const {data: currentPost, error: fetchError} = await supabase
     .from('CommunityPost')
     .select('dislikes')
-    .eq('id',id);
+    .eq('id',id)
+    .single();
 
-    const currentDislike = currentPost.dislikes;
+    if(fetchError){
+        return res.status(500).json(fetchError);
+    }
+
+    const currentDislike = currentPost.dislikes ;
     const{data, error}= await supabase
     .from('CommunityPost')
     .update({dislikes: currentDislike+1})
