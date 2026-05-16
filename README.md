@@ -3,6 +3,8 @@ Final project:
 
 Anime-World
 
+web link:inst377-final-project-app.vercel.app
+
 Description:
 
 This webpage is designed to bring anime fans something unique. This application helps you find new or old anime to watch, allows you to post your theory and other comments, shows the user top animes based on their score rating and finally a small random anime quote. 
