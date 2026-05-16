@@ -69,9 +69,10 @@ app.put('/CommunityPost/:id/likes', async(req,res)=>{
     .eq('id',id)
     .single();
 
+    const currentLike = currentPost.likes;
     const{data, error}= await supabase
     .from('CommunityPost')
-    .update({likes: (currentPost.likes || 0) +1})
+    .update({likes: currentLike +1})
     .eq('id',id);
 
     res.json(data);
@@ -83,13 +84,14 @@ app.put('/CommunityPost/:id/dislikes', async(req,res)=>{
     const {data: currentPost} = await supabase
     .from('CommunityPost')
     .select('dislikes')
-    .eq('id',id)
-    .single();
+    .eq('id',id);
 
+    const currentDislike = currentPost.dislikes;
     const{data, error}= await supabase
     .from('CommunityPost')
-    .update({dislikes: (currentPost.dislikes|| 0)+1})
-    .eq('id',id);
+    .update({dislikes: currentDislike+1})
+    .eq('id',id)
+    .select();
     
     res.json(data);
         

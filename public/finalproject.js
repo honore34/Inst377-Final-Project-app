@@ -26,9 +26,11 @@ if(document.getElementById('quote')){
 let chart;
 
 if (document.getElementById('Chart')){
-    document.getElementById('chart-container').style.display ='none';
+    
 
     window.lookupAnime = async function (){
+        document.getElementById('Chart').style.display ='none';
+        document.getElementById('spinner').style.display ='block';
 
         const limit = document.getElementById('limit').value;
 
@@ -62,7 +64,8 @@ if (document.getElementById('Chart')){
             },
               
         });
-        document.getElementById('chart-container').style.display = 'block';
+        document.getElementById('Chart').style.display = 'block';
+        document.getElementById('spinner').style.display = 'none';
     };
 
 }
@@ -247,23 +250,23 @@ async function loadpostData(){
             commentPosted.innerHTML=post['posted_comment'];
 
             const likeButton = document.createElement('button');
-            likeButton.innerHTML = `&#128077;${post.likes || 0}`;
+            likeButton.innerHTML = `&#128077;${post.likes}`;
 
             likeButton.onclick = async ()=>{
                 await fetch(`/CommunityPost/${post.id}/likes`,{
                     method:'PUT'
                 });
-                loadpostData();
+                await loadpostData();
             }
 
             const dislikeButton = document.createElement('button');
-            dislikeButton.innerHTML = `&#128078;${post.dislikes||0}`;
+            dislikeButton.innerHTML = `&#128078;${post.dislikes}`;
 
             dislikeButton.onclick = async ()=>{
                 await fetch(`/CommunityPost/${post.id}/dislikes`,{
                     method:'PUT'
                 });
-                loadpostData();
+                await loadpostData();
             }
 
             box.appendChild(username);
